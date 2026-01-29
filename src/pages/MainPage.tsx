@@ -41,7 +41,7 @@ export function MainPage() {
   const [sortBy, setSortBy] = useState<SortOption>('latest');
   const [page, setPage] = useState(0);
   
-  const observer = useRef<IntersectionObserver>();
+  const observer = useRef<IntersectionObserver | undefined>(undefined);
   const lastPostRef = useCallback(
     (node: HTMLDivElement) => {
       if (loadingMore) return;

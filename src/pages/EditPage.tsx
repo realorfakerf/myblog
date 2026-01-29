@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/lib/supabase';
-import { generateUniqueSlug } from '@/lib/slugify';
 import { Button } from '@/components/ui/button';
 import { ImageUpload } from '@/components/ImageUpload';
 import toast from 'react-hot-toast';
@@ -13,7 +12,7 @@ export function EditPage() {
   const [content, setContent] = useState('');
   const [tags, setTags] = useState('');
   const [isPublic, setIsPublic] = useState(true);
-  const [slug, setSlug] = useState('');
+  const [_slug, setSlug] = useState('');
   const [coverImage, setCoverImage] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
   const [isFetching, setIsFetching] = useState(true);

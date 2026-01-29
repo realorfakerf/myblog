@@ -1,7 +1,7 @@
-import { useState, useRef, DragEvent, ChangeEvent } from 'react';
+import { useState, useRef } from 'react';
+import type { DragEvent, ChangeEvent } from 'react';
 import { supabase } from '@/lib/supabase';
 import { X, Upload, Image as ImageIcon } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import toast from 'react-hot-toast';
 
 interface ImageUploadProps {
@@ -112,7 +112,7 @@ export function ImageUpload({
       setUploadProgress(60);
 
       // Supabase Storage에 업로드
-      const { data, error } = await supabase.storage
+      const { error } = await supabase.storage
         .from('blog-images')
         .upload(filePath, resizedBlob, {
           contentType: file.type,

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -122,13 +122,23 @@ export function DetailPage() {
   const incrementViewCount = async () => {
     if (!id) return;
 
-    await supabase.rpc('increment_view_count', { post_id: id }).catch(() => {
+    try {
+      await supabase.rpc('increment_view_count', { post_id: id });
+    } catch {
       // RPC 함수가 없으면 직접 업데이트
-      supabase
+      const { data: post } = await supabase
         .from('posts')
-        .update({ views_count: supabase.rpc('views_count + 1') })
-        .eq('id', id);
-    });
+        .select('views_count')
+        .eq('id', id)
+        .single();
+      
+      if (post) {
+        await supabase
+          .from('posts')
+          .update({ views_count: (post.views_count || 0) + 1 })
+          .eq('id', id);
+      }
+    }
   };
 
   const handleLike = async () => {

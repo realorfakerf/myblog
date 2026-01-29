@@ -192,7 +192,7 @@ export function CommentSection({ postId }: CommentSectionProps) {
   };
 
   // 답글 작성
-  const handleSubmitReply = async (parentCommentId: string, parentNickname: string) => {
+  const handleSubmitReply = async (parentCommentId: string, _parentNickname: string) => {
     if (!user) {
       toast.error('로그인이 필요합니다.');
       return;

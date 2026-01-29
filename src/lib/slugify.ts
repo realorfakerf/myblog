@@ -2,14 +2,6 @@
  * 제목을 URL-safe한 slug로 변환
  */
 export function slugify(text: string): string {
-  // 한글을 영문으로 변환하는 간단한 방법
-  // 실제로는 더 복잡한 로직이 필요할 수 있음
-  const koreanMap: { [key: string]: string } = {
-    ㄱ: 'g', ㄴ: 'n', ㄷ: 'd', ㄹ: 'r', ㅁ: 'm',
-    ㅂ: 'b', ㅅ: 's', ㅇ: '', ㅈ: 'j', ㅊ: 'ch',
-    ㅋ: 'k', ㅌ: 't', ㅍ: 'p', ㅎ: 'h',
-  };
-
   return text
     .toString()
     .toLowerCase()

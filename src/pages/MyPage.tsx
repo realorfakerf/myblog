@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/lib/supabase';
 import { Eye, Heart, MessageCircle, Edit, Trash2, Camera, Lock } from 'lucide-react';
@@ -29,7 +29,6 @@ interface PostWithStats extends Post {
 
 export function MyPage() {
   const { user, profile } = useAuth();
-  const navigate = useNavigate();
   const [posts, setPosts] = useState<PostWithStats[]>([]);
   const [likedPosts, setLikedPosts] = useState<PostWithStats[]>([]);
   const [loading, setLoading] = useState(true);
